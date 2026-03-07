@@ -18,4 +18,21 @@ public class PresentacionTienda
          Console.WriteLine(p.ObtenerPrecio());
       }
    }
+
+   public void MostrarTienda()
+   {
+      int opcion;
+      do
+      {
+         Console.WriteLine("Opciones: ");
+         Console.WriteLine("1. Mostrar Productos");
+         Console.WriteLine("2. Salir");
+         opcion = Console.Read();
+         if (opcion == 1)
+         {
+            MostrarStock();
+         }
+
+      } while (opcion != 2);
+   }
 }
