@@ -3,31 +3,24 @@ namespace TiendaConsola;
 public class Inventario
 {
     public List<Producto> productos;
-    public int tam;
 
-    private Inventario()
+    public void AgregarProducto(Producto p)
     {
-        productos = new List<Producto>();
-        tam=0;
+        productos.Add(p);
     }
-    
-    public void MostrarInventario()
+    public void MostrarProductos()
     {
-        foreach (Producto i in productos)
+        foreach (Producto p in productos)
         {
-            Console.WriteLine(i.nombre);
+            Console.WriteLine(p.ObtenerCodigo());
+            Console.WriteLine(p.ObtenerNombre());
+            Console.WriteLine(p.ObtenerPrecio());
         }
     }
 
-    public void AgregarProducto()
-    {
-        productos[tam].nombre=Console.ReadLine();
-        productos[tam].codigo=Console.ReadLine();
-        productos[tam].precio=double.Parse(Console.ReadLine());
-    }
-    
-    List<Producto> getProductos()
+    public List<Producto> ObtenerProductos()
     {
         return productos;
     }
+
 }

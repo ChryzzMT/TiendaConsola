@@ -8,7 +8,9 @@ public class Carrito
     {
         foreach (Producto i in productos)
         {
-            Console.WriteLine(i.nombre);
+            Console.WriteLine(i.ObtenerCodigo());
+            Console.WriteLine(i.ObtenerNombre());
+            Console.WriteLine(i.ObtenerPrecio());
         }
     }
 }
