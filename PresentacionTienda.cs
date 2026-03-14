@@ -33,6 +33,6 @@ public class PresentacionTienda
             MostrarStock();
          }
 
-      } while (opcion != 2);
+      } while (opcion !=2);
    }
 }
