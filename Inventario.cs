@@ -7,13 +7,22 @@ public class Inventario
     {
         productos.Add(p);
     }
-    public void MostrarProductos()
+
+    public void EliminarProducto(Producto p)
+    {
+        productos.Remove(p);
+    }
+
+    public void ActualizarProducto(string cod,string nomb,double pre )
     {
         foreach (Producto p in productos)
         {
-            Console.WriteLine(p.ObtenerCodigo());
-            Console.WriteLine(p.ObtenerNombre());
-            Console.WriteLine(p.ObtenerPrecio());
+            if (p.ObtenerCodigo() == cod)
+            {
+                p.setCodigo(cod);
+                p.setNombre(nomb);
+                p.setPrecio(pre);
+            }   
         }
     }
 

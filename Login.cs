@@ -2,14 +2,42 @@ namespace TiendaConsola;
 
 public class Login
 {
-    private Usuario usuarioLogin;
+    private List<Usuario> usuarios;
 
-    private bool verifUsuario(Usuario u)
+    public void agregarUsuario(string usr, string pwd)
     {
-        if (this.usuarioLogin = u)
+        Usuario us = new Usuario(usr, pwd);
+        usuarios.Add(us);
+    }
+    public void eliminarUsuario(string usr, string pwd)
+    {
+        foreach (Usuario ui in usuarios)
         {
-            return true;
+            if (verifUsuario(ui.obtnUsuario(), ui.obtnPassword()))
+            {
+                usuarios.Remove(ui);
+            }
         }
+    }
+
+    public void actualizarUsuario(string usr, string pwd, string nuevoUsuario,string nuevoPassword)
+    {
+        foreach (Usuario ui in usuarios)
+        {
+            if (verifUsuario(ui.obtnUsuario(), ui.obtnPassword()))
+            {
+                ui.setUsuario(nuevoUsuario);
+                ui.setPassword(nuevoPassword);
+            }
+        }
+    }
+    public bool verifUsuario(string usr, string pwd)
+    {
+        foreach(Usuario ui in usuarios)
+            if (ui.obtnUsuario() == usr && ui.obtnPassword()==pwd)
+            {
+                return true;
+            }
         return false;
     }
 }
