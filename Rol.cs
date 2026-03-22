@@ -2,16 +2,47 @@ namespace TiendaConsola;
 
 public class Rol
 {
-    private string nombre;
-    private string descripcion;
+    private string Nombre { get; set; }
+    private string Descripcion { get; set; }
+    private Privilegios Privilegios;
 
-    public Rol(string nb, string dsc)
+    private List<Rol> roles { get; set; }
+
+    public string getNombreRol()
     {
-        this.nombre = nb;
-        this.descripcion = dsc;
+        return Nombre;
     }
-    
-    public string obtnNombre(){ return this.nombre; }
-    public string obtnDescripcion(){ return this.descripcion; }
+
+    public Rol()
+    {
+        return;
+    }
+    public Rol(string nb, string dsc,bool listarProductos, bool crearProducto, bool actualizarProducto, bool eliminarProducto,bool listarUsuarios, bool crearUsuario, bool actualizarUsuario, bool eliminarUsuario )
+    {
+        Privilegios = new Privilegios(listarProductos,crearProducto, actualizarProducto, eliminarProducto, listarUsuarios, crearUsuario, actualizarUsuario, eliminarUsuario);
+        this.Nombre = nb;
+        this.Descripcion = dsc;
+    }
+
+    public void crearRol(string nb, string dsc,bool listarProductos, bool crearProducto, bool actualizarProducto, bool eliminarProducto,bool listarUsuarios, bool crearUsuario, bool actualizarUsuario, bool eliminarUsuario)
+    {
+        Rol r = new Rol(nb, dsc, listarProductos, crearProducto, actualizarProducto, eliminarProducto, listarUsuarios,
+            crearUsuario, actualizarUsuario, eliminarUsuario);
+        roles.Add(r);
+    }
+
+    public Rol asignarRol(string nombreRol)
+    {
+        foreach (Rol r in roles)
+        {
+            if (r.Nombre == nombreRol)
+            {
+                return r;
+            }
+            
+        }
+
+        return null;
+    }
     
 }

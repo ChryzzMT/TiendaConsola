@@ -4,9 +4,14 @@ public class Login
 {
     private List<Usuario> usuarios;
 
-    public void agregarUsuario(string usr, string pwd)
+    public Login()
     {
-        Usuario us = new Usuario(usr, pwd);
+        usuarios = new List<Usuario>();
+    }
+
+    public void agregarUsuario(string usr, string pwd, string nR)
+    {
+        Usuario us = new Usuario(usr, pwd,nR);
         usuarios.Add(us);
     }
     public void eliminarUsuario(string usr, string pwd)

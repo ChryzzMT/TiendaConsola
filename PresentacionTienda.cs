@@ -3,15 +3,18 @@ namespace TiendaConsola;
 public class PresentacionTienda
 {
    private Inventario Inventario;
+   private Login login;
 
-   public PresentacionTienda(Inventario Inventario)
+   public PresentacionTienda()
    {
-      this.Inventario = Inventario;
+      Inventario = new Inventario();
+      login=new Login()
+      
    }
 
    public void MostrarStock()
    {
-      foreach (Producto p in Inventario.ObtenerProductos())
+      foreach (Producto p in Inventario.GetInventario())
       {
          Console.WriteLine(p.ObtenerCodigo());
          Console.WriteLine(p.ObtenerNombre());
@@ -21,18 +24,30 @@ public class PresentacionTienda
 
    public void MostrarTienda()
    {
-      int opcion;
-      do
+      int opcion=0;
+      
+      
+      while (opcion != 2)
       {
          Console.WriteLine("Opciones: ");
          Console.WriteLine("1. Mostrar Productos");
          Console.WriteLine("2. Salir");
-         opcion = Console.Read();
+         opcion = int.Parse(Console.ReadLine());
+         
          if (opcion == 1)
          {
+            Console.WriteLine("MOSTRANDO PRODCUTOS");
             MostrarStock();
          }
+         
+      }
 
-      } while (opcion !=2);
+      Console.WriteLine("Saliste de la Tienda");
+      return;
+   }
+   public bool iniciarSesion()
+   {
+      Console.Write("Ingrese sus datos para iniciar sesion: ");
+      
    }
 }

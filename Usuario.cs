@@ -4,10 +4,14 @@ public class Usuario
 {
     private string usuario;
     private string password;
-    public Usuario(string usr, string pwd)
+    private Rol rol;
+
+    public Usuario(string usr, string pwd, string nombreRol)
     {
-        this.usuario = usr;
-        this.password = pwd;
+        usuario = usr;
+        password = pwd;
+        rol= new Rol();
+        rol.asignarRol(nombreRol);
     }
 
     public void setUsuario(string usr)
@@ -24,7 +28,7 @@ public class Usuario
     {
         return this.usuario;
     }
-
+    
     public string obtnPassword()
     {
         return this.password;
