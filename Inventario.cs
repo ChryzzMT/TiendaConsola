@@ -3,8 +3,9 @@ namespace TiendaConsola;
 public class Inventario
 {
     public List<Producto> productos = new List<Producto>();
-    public void AgregarProducto(Producto p)
+    public void AgregarProducto(string codigo ,string nombre,double precio)
     {
+        Producto p = new Producto(codigo, nombre, precio);
         productos.Add(p);
     }
 
