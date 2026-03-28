@@ -26,18 +26,23 @@ public class Inventario
         
     }
 
-    public void ActualizarProducto(string cod,string nomb,double pre,int stck )
+    public void ActualizarProducto(string cod,string NuevoNomb,double NuevoPrecio,int NuevoStck )
     {
-        foreach (Producto p in productos)
+        for (int i = 0; i < productos.Count; i++)
         {
-            if (p.ObtenerCodigo() == cod)
+            if (productos[i].ObtenerCodigo() == cod)
             {
-                p.setCodigo(cod);
-                p.setNombre(nomb);
-                p.setPrecio(pre);
-                p.setStock(stck);
-            }   
+                productos[i].setNombre(NuevoNomb);
+                productos[i].setPrecio(NuevoPrecio);
+                productos[i].setStock(NuevoStck);
+            }
         }
+    }
+
+    public void actualizarStock(int i, int cantParaRestar)
+    {
+        int nuevoStck = productos[i].ObtnerStock() - cantParaRestar;
+        productos[i].setStock(nuevoStck);
     }
 
     public List<Producto> GetInventario()

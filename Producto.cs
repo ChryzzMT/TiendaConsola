@@ -37,7 +37,8 @@ public class Producto
     public string ObtenerCodigo() { return this.codigo; }
     public string ObtenerNombre() { return this.nombre; }
     public double ObtenerPrecio() { return this.precio; }
-    
-    
-    
+    public int ObtnerStock() { return this.stock; }
+
+
+
 }

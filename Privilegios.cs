@@ -2,14 +2,15 @@ namespace TiendaConsola;
 
 public class Privilegios
 {
-    private bool ListarProductos { get; set; }
-    private bool CrearProducto { get; set; }
-    private bool ActualizarProducto { get; set; }
-    private bool EliminarProducto { get; set; }
-    private bool ListarUsuarios { get; set; }
-    private bool CrearUsuario { get; set; }
-    private bool ActualizarUsuario { get; set; }
-    private bool EliminarUsuario { get; set; }
+    private bool ListarProductos;
+    private bool CrearProducto;
+    private bool ActualizarProducto;
+    private bool EliminarProducto;
+    private bool ListarUsuarios;
+    private bool CrearUsuario;
+    private bool ActualizarUsuario;
+    private bool EliminarUsuario;
+    private bool RealizarCompra;
 
     public Privilegios()
     {
@@ -21,9 +22,10 @@ public class Privilegios
         CrearUsuario = false;
         ActualizarUsuario = false;
         EliminarUsuario = false;
+        RealizarCompra = false;
     }
     
-    public Privilegios(bool listarProductos, bool crearProducto, bool actualizarProducto, bool eliminarProducto,bool listarUsuarios, bool crearUsuario, bool actualizarUsuario, bool eliminarUsuario )
+    public Privilegios(bool listarProductos, bool crearProducto, bool actualizarProducto, bool eliminarProducto,bool listarUsuarios, bool crearUsuario, bool actualizarUsuario, bool eliminarUsuario,bool realizarCompra)
     {
         ListarProductos = listarProductos;
         CrearProducto = crearProducto;
@@ -33,5 +35,6 @@ public class Privilegios
         CrearUsuario = crearUsuario;
         ActualizarUsuario = actualizarUsuario;
         EliminarUsuario = eliminarUsuario;
+        RealizarCompra = realizarCompra;
     }
 }   

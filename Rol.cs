@@ -2,47 +2,32 @@ namespace TiendaConsola;
 
 public class Rol
 {
-    private string Nombre { get; set; }
-    private string Descripcion { get; set; }
+    public string Nombre;
+    private string Descripcion;
     private Privilegios Privilegios;
 
-    private List<Rol> roles { get; set; }
-
-    public string getNombreRol()
+    private List<Rol> roles=new List<Rol>();
+    
+    public List<Rol> getRoles()
     {
-        return Nombre;
+        return roles;
     }
 
     public Rol()
     {
         return;
     }
-    public Rol(string nb, string dsc,bool listarProductos, bool crearProducto, bool actualizarProducto, bool eliminarProducto,bool listarUsuarios, bool crearUsuario, bool actualizarUsuario, bool eliminarUsuario )
+    public Rol(string nb, string dsc,bool listarProductos, bool crearProducto, bool actualizarProducto, bool eliminarProducto,bool listarUsuarios, bool crearUsuario, bool actualizarUsuario, bool eliminarUsuario,bool realizarCompra )
     {
-        Privilegios = new Privilegios(listarProductos,crearProducto, actualizarProducto, eliminarProducto, listarUsuarios, crearUsuario, actualizarUsuario, eliminarUsuario);
+        Privilegios = new Privilegios(listarProductos,crearProducto, actualizarProducto, eliminarProducto, listarUsuarios, crearUsuario, actualizarUsuario, eliminarUsuario,realizarCompra);
         this.Nombre = nb;
         this.Descripcion = dsc;
     }
 
-    public void crearRol(string nb, string dsc,bool listarProductos, bool crearProducto, bool actualizarProducto, bool eliminarProducto,bool listarUsuarios, bool crearUsuario, bool actualizarUsuario, bool eliminarUsuario)
+    public void crearRol(string nb, string dsc,bool listarProductos, bool crearProducto, bool actualizarProducto, bool eliminarProducto,bool listarUsuarios, bool crearUsuario, bool actualizarUsuario, bool eliminarUsuario,bool realizarCompra)
     {
-        Rol r = new Rol(nb, dsc, listarProductos, crearProducto, actualizarProducto, eliminarProducto, listarUsuarios,
-            crearUsuario, actualizarUsuario, eliminarUsuario);
+        Rol r = new Rol(nb, dsc, listarProductos, crearProducto, actualizarProducto, eliminarProducto, listarUsuarios, crearUsuario, actualizarUsuario, eliminarUsuario,realizarCompra);
         roles.Add(r);
-    }
-
-    public Rol asignarRol(string nombreRol)
-    {
-        foreach (Rol r in roles)
-        {
-            if (r.Nombre == nombreRol)
-            {
-                return r;
-            }
-            
-        }
-
-        return null;
     }
     
 }

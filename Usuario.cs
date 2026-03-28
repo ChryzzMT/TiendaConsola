@@ -6,31 +6,33 @@ public class Usuario
     private string password;
     private Rol rol;
 
+    public string getNombreRol()
+    {
+        return rol.Nombre;
+    }
     public Usuario(string usr, string pwd, string nombreRol)
     {
         usuario = usr;
         password = pwd;
         rol= new Rol();
-        rol.asignarRol(nombreRol);
+        rol.Nombre = nombreRol;
     }
 
-    public void setUsuario(string usr)
-    {
-        this.usuario = usr;
-    }
+    public void setUsuario(string usr) { this.usuario = usr; }
 
-    public void setPassword(string pwd)
-    {
-        this.password = pwd;
-    }
-
-    public string obtnUsuario()
-    {
-        return this.usuario;
-    }
+    public void setPassword(string pwd) { this.password = pwd; }
     
-    public string obtnPassword()
+    public void asignarRol(string nombreRol)
     {
-        return this.password;
+        for(int i=0;i<rol.getRoles().Count;i++)
+        {
+            if (rol.getRoles()[i].Nombre == nombreRol)
+            {
+                rol.Nombre = nombreRol;
+            }
+        }
     }
+    public string obtnUsuario() { return this.usuario; }
+    
+    public string obtnPassword() { return this.password; }
 }
