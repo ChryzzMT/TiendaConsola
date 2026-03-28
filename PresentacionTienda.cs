@@ -13,9 +13,12 @@ public class PresentacionTienda
          if (inventario.GetInventario()[i].ObtnerStock() > 0)
          {
             Console.Write(inventario.GetInventario()[i].ObtenerNombre());
+            Console.Write(inventario.GetInventario()[i].getDescripcion());
             Console.Write("        ");
+            Console.Write("PRECIO:");
             Console.Write(inventario.GetInventario()[i].ObtenerPrecio());
             Console.Write("        ");
+            Console.Write("CANTIDAD:");
             Console.Write(inventario.GetInventario()[i].ObtnerStock());
             Console.WriteLine(" ");
 
@@ -31,10 +34,14 @@ public class PresentacionTienda
          Console.Write("        ");
             Console.Write(inventario.GetInventario()[i].ObtenerNombre());
             Console.Write("        ");
+            Console.Write("PRECIO:");
             Console.Write(inventario.GetInventario()[i].ObtenerPrecio());
             Console.Write("        ");
+            Console.Write("CANTIDAD:");
             Console.Write(inventario.GetInventario()[i].ObtnerStock());
+            Console.WriteLine(" ");
       }
+     
    }
    
    public void MostrarTienda(Inventario inventario, Login Log,Usuario us,Carrito carrit)
@@ -68,7 +75,9 @@ public class PresentacionTienda
                double precio = double.Parse(Console.ReadLine());
                Console.Write("Introduzca la cantidad del producto: ");
                int stock = int.Parse(Console.ReadLine());
-               inventario.AgregarProducto(codigo, nombre, precio, stock);
+               Console.Write("Introduzca una descripcion del producto: ");
+               string descripcion = Console.ReadLine();
+               inventario.AgregarProducto(codigo, nombre, precio, stock,descripcion);
                break;
             case 3:
                Console.Write("Introduzca el codigo del producto: ");
@@ -85,6 +94,8 @@ public class PresentacionTienda
                Console.Write("Introduzca el codigo del producto: ");
                string cod = Console.ReadLine();
                inventario.EliminarProducto(cod);
+               Console.Write("Se elimino el producto con codigo ");
+               Console.Write(cod);
                break;
             case 5 :
                ListarUsuarios(Log.GetListaUsuarios());
@@ -147,9 +158,12 @@ public class PresentacionTienda
                break;
             case 3 :
                cerrarSesion = true;
+               Console.WriteLine("Se cerro la sesion");
                break;
             case 4 :
+               cerrarSesion = true;
                cerrarTienda = true;
+               Console.WriteLine("La tienda cerro");
                break;
          }
 
@@ -209,9 +223,10 @@ public class PresentacionTienda
                c.AgregarAlCarrito(i,prodAgregar,cant);
                break;
             case 2 :
+               MostrarCarrito(c);
                Console.Write("Introduzca el nombre del producto para eliminar: ");
                string nomb = Console.ReadLine();
-               c.EliminarDelCarrito(nomb);
+               c.EliminarDelCarrito(nomb,i);
                break;
             case 3:
                MostrarProductosDisponibles(i);

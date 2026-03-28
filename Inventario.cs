@@ -8,19 +8,19 @@ public class Inventario
     {
         productos=new List<Producto>();
     }
-    public void AgregarProducto(string codigo ,string nombre,double precio, int stock)
+    public void AgregarProducto(string codigo ,string nombre,double precio, int stock, string descripcion)
     {
-        Producto p = new Producto(codigo, nombre, precio,stock);
+        Producto p = new Producto(codigo, nombre, precio,stock,descripcion);
         productos.Add(p);
     }
 
     public void EliminarProducto(string codigo)
     {
-        foreach (Producto i in productos)
+        for(int i=0;i<productos.Count;i++)
         {
-            if (i.ObtenerCodigo() == codigo)
+            if (productos[i].ObtenerCodigo() == codigo)
             {
-                productos.Remove(i);
+                productos.Remove(productos[i]);
             }
         }
         
@@ -43,6 +43,17 @@ public class Inventario
     {
         int nuevoStck = productos[i].ObtnerStock() - cantParaRestar;
         productos[i].setStock(nuevoStck);
+    }
+
+    public void restaurarStock(string cod, int cantRestaurar,Inventario inv)
+    {
+        for (int i = 0; i < inv.GetInventario().Count; i++)
+        {
+            if (cod == inv.GetInventario()[i].ObtenerCodigo())
+            {
+                inv.GetInventario()[i].setStock(inv.GetInventario()[i].ObtnerStock()+cantRestaurar);
+            }
+        }
     }
 
     public List<Producto> GetInventario()

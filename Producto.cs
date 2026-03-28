@@ -6,13 +6,15 @@ public class Producto
     private string nombre;
     private double precio;
     private int stock;
+    private string descripcion;
 
-    public Producto(string codigo, string nombre, double precio,int stock)
+    public Producto(string codigo, string nombre, double precio,int stock,string descripcion)
     {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
+        this.descripcion = descripcion;
     }
 
     public void setCodigo(string c)
@@ -34,6 +36,8 @@ public class Producto
     {
         this.stock = stock;
     }
+
+    public string getDescripcion() { return descripcion;}
     public string ObtenerCodigo() { return this.codigo; }
     public string ObtenerNombre() { return this.nombre; }
     public double ObtenerPrecio() { return this.precio; }
