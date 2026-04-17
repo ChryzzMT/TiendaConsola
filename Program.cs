@@ -22,11 +22,11 @@ invent.AgregarProducto("9137","Coca Cola",4.5,45," 350 ml                ");
 invent.AgregarProducto("2381", "Papas Fritas",15.67,24," 500 gramos        ");
 
 
-while (Tienda.cerrarTienda==false)
+while (!Tienda.getCerrarTienda())
 {
-    Tienda.cerrarSesion = false;
+    Tienda.setCerrarSesion(false);
     Usuario us1 = Tienda.IniciarSesion(log);
-    while (Tienda.cerrarSesion == false)
+    while (!Tienda.getCerrarSesion())
     {
         Tienda.MostrarTienda(invent,log,us1,carrito);
     }

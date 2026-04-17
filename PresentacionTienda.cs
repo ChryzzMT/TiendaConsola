@@ -2,8 +2,18 @@ namespace TiendaConsola;
 
 public class PresentacionTienda
 {
-   public bool cerrarSesion=false;
-   public bool cerrarTienda=false;
+   private bool cerrarSesion;
+   private bool cerrarTienda;
+
+   public PresentacionTienda()
+   {
+      cerrarSesion = false;
+      cerrarTienda = false;
+   }
+   public void setCerrarSesion(bool b) { cerrarSesion = b;}
+   public bool getCerrarSesion() { return cerrarSesion;}
+   public void setCerrarTienda(bool b) { cerrarTienda = b;}
+   public bool getCerrarTienda() { return cerrarTienda;}
    public void MostrarProductosDisponibles(Inventario inventario)
    {     
       Console.WriteLine(" ");
