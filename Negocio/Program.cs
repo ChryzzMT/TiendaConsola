@@ -21,7 +21,6 @@ invent.AgregarProducto("7283","Arroz",10.00,35," 1 kilogramo               ");
 invent.AgregarProducto("9137","Coca Cola",4.5,45," 350 ml                ");
 invent.AgregarProducto("2381", "Papas Fritas",15.67,24," 500 gramos        ");
 
-
 while (!Tienda.getCerrarTienda())
 {
     Tienda.setCerrarSesion(false);

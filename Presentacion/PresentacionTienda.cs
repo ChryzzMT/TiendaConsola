@@ -20,16 +20,16 @@ public class PresentacionTienda
       Console.WriteLine("LOS PRODUCTOS DISPONIBLES SON: ");
       for(int i=0;i<inventario.GetInventario().Count; i++)
       {
-         if (inventario.GetInventario()[i].ObtnerStock() > 0)
+         if (inventario.GetInventario()[i].getCantidad() > 0)
          {
-            Console.Write(inventario.GetInventario()[i].ObtenerNombre());
-            Console.Write(inventario.GetInventario()[i].getDescripcion());
+            Console.Write(inventario.GetInventario()[i].getProducto().ObtenerNombre());
+            Console.Write(inventario.GetInventario()[i].getProducto().getDescripcion());
             Console.Write("        ");
             Console.Write("PRECIO:");
-            Console.Write(inventario.GetInventario()[i].ObtenerPrecio());
+            Console.Write(inventario.GetInventario()[i].getProducto().ObtenerPrecio());
             Console.Write("        ");
             Console.Write("CANTIDAD:");
-            Console.Write(inventario.GetInventario()[i].ObtnerStock());
+            Console.Write(inventario.GetInventario()[i].getCantidad());
             Console.WriteLine(" ");
 
          }
@@ -40,15 +40,15 @@ public class PresentacionTienda
    {
       for(int i=0;i<inventario.GetInventario().Count; i++)
       {
-         Console.Write(inventario.GetInventario()[i].ObtenerCodigo());
+         Console.Write(inventario.GetInventario()[i].getProducto().ObtenerCodigo());
          Console.Write("        ");
-            Console.Write(inventario.GetInventario()[i].ObtenerNombre());
+            Console.Write(inventario.GetInventario()[i].getProducto().ObtenerNombre());
             Console.Write("        ");
             Console.Write("PRECIO:");
-            Console.Write(inventario.GetInventario()[i].ObtenerPrecio());
+            Console.Write(inventario.GetInventario()[i].getProducto().ObtenerPrecio());
             Console.Write("        ");
             Console.Write("CANTIDAD:");
-            Console.Write(inventario.GetInventario()[i].ObtnerStock());
+            Console.Write(inventario.GetInventario()[i].getCantidad());
             Console.WriteLine(" ");
       }
      
@@ -70,6 +70,7 @@ public class PresentacionTienda
          Console.WriteLine("8. Eliminar Usuario");
          Console.WriteLine("9. Cerrar Sesion");
          Console.WriteLine("10. Cerrar Tienda");
+         Console.WriteLine("11. Ver Ventas");
          Console.WriteLine(" ");
          opcion=int.Parse(Console.ReadLine());
          switch (opcion)
@@ -96,9 +97,7 @@ public class PresentacionTienda
                string nuvNombre = Console.ReadLine();
                Console.Write("Introduzca el nuevo precio del producto: ");
                double nuvPrecio = double.Parse(Console.ReadLine());
-               Console.Write("Introduzca la nueva cantidad del producto: ");
-               int nuvStock = int.Parse(Console.ReadLine());
-               inventario.ActualizarProducto(Codigo,nuvNombre,nuvPrecio,nuvStock);
+               inventario.ActualizarProducto(Codigo,nuvNombre,nuvPrecio);
                break;
             case 4:
                Console.Write("Introduzca el codigo del producto: ");
@@ -145,6 +144,9 @@ public class PresentacionTienda
                cerrarSesion = true;
                cerrarTienda = true;
                Console.WriteLine("Se cerro la tienda");
+               break;
+            case 11:
+               verVentas(inventario);
                break;
          }
          Console.WriteLine(" ");
@@ -197,11 +199,11 @@ public class PresentacionTienda
       for (int i = 0; i < c.getCarrito().Count; i++)
       {
          Console.Write(c.getCarrito()[i].ObtenerNombre());
-         Console.Write("        ");
+         Console.Write("      EL PRECIO ES DE:");
          Console.Write(c.getCarrito()[i].ObtenerPrecio());
-         Console.Write("        ");
+         Console.Write("      LA CANTIDAD ES DE:");
          Console.Write(c.getListaCantidad()[i]);
-         Console.Write("        ");
+         Console.Write("      EL SUBTOTAL ES DE:");
          double subtotalIndividual = c.getListaCantidad()[i] * c.getCarrito()[i].ObtenerPrecio();
          Console.WriteLine(subtotalIndividual);// saca el subtotal de cada producto
       }
@@ -249,7 +251,6 @@ public class PresentacionTienda
                break;
          }
       }
-      
          Console.WriteLine("<<<<<<< INGRESE DATOS PARA LA COMPRA >>>>>>> ");
          Console.Write("Nombre para la compra: ");
          string nombreCompra = Console.ReadLine();
@@ -258,6 +259,7 @@ public class PresentacionTienda
          compra.setMetodoPago(metodoPago);
          compra.setNombreCompra(nombreCompra);
          MostrarCompra(c,compra);
+         i.guardarProductosVendidos(c.getCarrito(),c.getListaCantidad());
    }
 
    public void MostrarCompra(Carrito c,Compra compra)
@@ -300,8 +302,33 @@ public class PresentacionTienda
             }
          }
       }
-
       return null;
+   }
+
+   public void verVentas(Inventario inv)
+   {
+      if (inv.getProductoVendidos() == null)
+      {
+         Console.Write("NO SE VENDEIRON PRODUCTOS TODAVIA");
+         return;
+      }
+      Console.WriteLine("LOS PRODUCTOS QUE SE VENDIERON SON: ");
+      double Total = 0;
+      for (int i = 0; i < inv.getProductoVendidos().Count; i++)
+      {
+         Console.Write(inv.getProductoVendidos()[i].getProducto().ObtenerNombre());
+         Console.Write("       ");
+         Console.Write("CANTIDAD: ");
+         Console.Write(inv.getProductoVendidos()[i].getCantidad());
+         Console.Write("    PRECIO: ");
+         Console.Write(inv.getProductoVendidos()[i].getProducto().ObtenerPrecio());
+         Console.Write("    SUBTOTAL: "); 
+         Total=Total+ inv.getProductoVendidos()[i].getProducto().ObtenerPrecio()*inv.getProductoVendidos()[i].getCantidad();
+         Console.Write(Total);
+         Console.WriteLine(" ");
+      }
+      Console.Write("TOTAL DE LAS VENTAS: ");
+      Console.Write(Total);
    }
    
 }

@@ -8,7 +8,7 @@ public class Login
     {
         usuarios = new List<Usuario>();
     }
-
+    
     public void agregarUsuario(string usr, string pwd, string nR)
     {
         Usuario us = new Usuario(usr, pwd,nR);

@@ -2,7 +2,7 @@ namespace TiendaConsola;
 
 public class Compra
 {
-    private string NombreCompra;
+    private string NombreCliente;
     private string MetodoPago;
     private double Total;
     private double subTotal;
@@ -21,12 +21,12 @@ public class Compra
             subTotal = subTotal + (carr.getListaCantidad()[i] * carr.getCarrito()[i].ObtenerPrecio());
         }
     }
-    public string getNombreCompra() { return NombreCompra; }
+    public string getNombreCompra() { return NombreCliente; }
 
     public string getMetodoPago() { return MetodoPago;}
     public double getSubtotal() { return subTotal;}
     public double getTotal() { return Total;}
-    public void setNombreCompra(string com) { NombreCompra = com; }
+    public void setNombreCompra(string com) { NombreCliente = com; }
     public void setMetodoPago(string met) { MetodoPago = met; }
 
 

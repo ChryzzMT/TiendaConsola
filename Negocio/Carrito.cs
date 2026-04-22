@@ -18,9 +18,9 @@ public class Carrito
     {
         for (int  i = 0; i < inventario.GetInventario().Count; i++)
         {
-            if (inventario.GetInventario()[i].ObtenerNombre()==nombre)
+            if (inventario.GetInventario()[i].getProducto().ObtenerNombre()==nombre)
             {
-                carrito.Add(inventario.GetInventario()[i]);
+                carrito.Add(inventario.GetInventario()[i].getProducto());
                 ListaCantidad.Add(cantidad);
                 inventario.actualizarStock(i,cantidad);
             }
@@ -33,7 +33,7 @@ public class Carrito
         {
             if (carrito[i].ObtenerNombre() == nombre)
             {
-                inv.restaurarStock(carrito[i].ObtenerCodigo(),ListaCantidad[i],inv);
+                inv.devolverCantidad(carrito[i].ObtenerCodigo(),ListaCantidad[i]);
                 ListaCantidad.RemoveAt(i);
                 carrito.RemoveAt(i);
                 break;
