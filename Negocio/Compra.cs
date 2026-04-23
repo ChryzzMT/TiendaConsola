@@ -6,19 +6,26 @@ public class Compra
     private string MetodoPago;
     private double Total;
     private double subTotal;
-
-    public void sacarTotal(Carrito carrit)
+    private Carrito carrito;
+    
+    public Compra(string n,string mp,Carrito c)
     {
-        for (int i = 0; i < carrit.getCarrito().Count; i++)
+        NombreCliente = n;
+        MetodoPago = mp;
+        carrito = c;
+    }
+    public void sacarTotal()
+    {
+        for (int i = 0; i < carrito.getCarrito().Count; i++)
         {
-            Total = Total + (carrit.getCarrito()[i].ObtenerPrecio() * carrit.getListaCantidad()[i]);
+            Total = Total + (carrito.getCarrito()[i].ObtenerPrecio() * carrito.getListaCantidad()[i]);
         }
     }
-    public void sacarSubtotal(Carrito carr)
+    public void sacarSubtotal()
     {
-        for (int i = 0; i < carr.getCarrito().Count; i++)
+        for (int i = 0; i < carrito.getCarrito().Count; i++)
         {
-            subTotal = subTotal + (carr.getListaCantidad()[i] * carr.getCarrito()[i].ObtenerPrecio());
+            subTotal = subTotal + (carrito.getListaCantidad()[i] * carrito.getCarrito()[i].ObtenerPrecio());
         }
     }
     public string getNombreCompra() { return NombreCliente; }

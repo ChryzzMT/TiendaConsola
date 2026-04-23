@@ -54,7 +54,7 @@ public class PresentacionTienda
      
    }
    
-   public void MostrarTienda(Inventario inventario, Login Log,Usuario us,Carrito carrit)
+   public void MostrarTienda(Inventario inventario, Login Log,Usuario us)
    {
       int opcion=0;
       if (us.getNombreRol() == "Administrador")
@@ -166,7 +166,7 @@ public class PresentacionTienda
                MostrarProductosDisponibles(inventario);
                break;
             case 2:
-               RealizarCompra(inventario,carrit);
+               RealizarCompra(inventario);
                break;
             case 3 :
                cerrarSesion = true;
@@ -210,10 +210,9 @@ public class PresentacionTienda
       Console.WriteLine("<-=-=-=-=-==================================== =-=-=-=-=-=->");
    }
 
-   public void RealizarCompra(Inventario i,Carrito c)
+   public void RealizarCompra(Inventario i)
    {
-      Compra compra = new Compra();
-
+      Carrito c = new Carrito();
       bool acabarCarrito = false;
       while (acabarCarrito == false)
       {
@@ -256,8 +255,7 @@ public class PresentacionTienda
          string nombreCompra = Console.ReadLine();
          Console.Write("Metodo de pago: ");
          string metodoPago = Console.ReadLine();
-         compra.setMetodoPago(metodoPago);
-         compra.setNombreCompra(nombreCompra);
+         Compra compra = new Compra(nombreCompra, metodoPago,c);
          MostrarCompra(c,compra);
          i.guardarProductosVendidos(c.getCarrito(),c.getListaCantidad());
    }
@@ -272,8 +270,8 @@ public class PresentacionTienda
       Console.WriteLine(compra.getMetodoPago());
       
       MostrarCarrito(c);
-      compra.sacarSubtotal(c);
-      compra.sacarTotal(c);
+      compra.sacarSubtotal();
+      compra.sacarTotal();
       Console.Write("El SUBTOTAL ES DE: ");
       Console.WriteLine(compra.getSubtotal());
       Console.Write("El TOTAL es de: ");

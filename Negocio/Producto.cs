@@ -6,7 +6,7 @@ public class Producto
     private string nombre;
     private double precio;
     private string descripcion;
-
+// el codigo tiene que ser unico para cada producto
     public Producto(string codigo, string nombre, double precio,string descripcion)
     {
         this.codigo = codigo;
@@ -27,7 +27,7 @@ public class Producto
 
     public void setPrecio(double p)
     {
-        this.precio = p;
+        precio = p;
     }
 
     public string getDescripcion() { return descripcion;}

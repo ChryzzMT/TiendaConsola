@@ -6,8 +6,6 @@ Rol rol = new Rol();
 PresentacionTienda Tienda = new PresentacionTienda();
 Login log = new Login();
 Inventario invent = new Inventario();
-Carrito carrito = new Carrito();
-Compra comp = new Compra();
 rol.crearRol("Administrador","Controla la tienda",true,true,true,true,true,true,true,true,false);
 rol.crearRol("Cliente","Compra cosas en la tienda",false,false,false,false,false,false,false,false,true);
 
@@ -27,7 +25,7 @@ while (!Tienda.getCerrarTienda())
     Usuario us1 = Tienda.IniciarSesion(log);
     while (!Tienda.getCerrarSesion())
     {
-        Tienda.MostrarTienda(invent,log,us1,carrito);
+        Tienda.MostrarTienda(invent,log,us1);
     }
 }
 

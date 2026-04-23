@@ -5,6 +5,11 @@ public class Carrito
     private List<Producto> carrito = new List<Producto>();
     private List<int> ListaCantidad = new List<int>();
 
+    public Carrito()
+    {
+        carrito = new List<Producto>();
+        ListaCantidad = new List<int>();
+    }
     public List<int> getListaCantidad()
     {
         return ListaCantidad;
