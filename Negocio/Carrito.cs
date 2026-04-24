@@ -27,7 +27,7 @@ public class Carrito
             {
                 carrito.Add(inventario.GetInventario()[i].getProducto());
                 ListaCantidad.Add(cantidad);
-                inventario.actualizarStock(i,cantidad);
+                inventario.quitarCantidadInventario(i,cantidad);
             }
         }
     }

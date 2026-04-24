@@ -10,7 +10,7 @@ public class Inventario
         productos=new List<ProductoInventario>();
         productosVendidos = new List<ProductoInventario>();
     }
-//metodo agregar mas cantidad a un producto //cada vez que agregue un producto tiene que crearle su codigo
+    
     public void agregarCantidad(string codigo, int cantidadExtra)
     {
         for (int i = 0; i < productos.Count; i++)
@@ -57,7 +57,7 @@ public class Inventario
         }
     }
 
-    public void actualizarStock(int i, int cantParaRestar)
+    public void quitarCantidadInventario(int i, int cantParaRestar)
     {
         int nuevoStck = productos[i].getCantidad()- cantParaRestar;
         productos[i].setCantidad(nuevoStck);
