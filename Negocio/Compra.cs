@@ -19,7 +19,8 @@ public class Compra
     }
     public void sacarTotal()
     {
-        Total = subTotal * (descuentoBase.getPorcentajeDesc() + descuentoAdi.getPorcentajeDesc());
+        double exp = subTotal * (descuentoBase.getPorcentajeDesc() + descuentoAdi.getPorcentajeDesc());
+        Total = subTotal - exp;
     }
     public void sacarSubtotal()
     {
