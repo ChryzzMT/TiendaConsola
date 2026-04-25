@@ -9,9 +9,9 @@ public class Login
         usuarios = new List<Usuario>();
     }
     
-    public void agregarUsuario(string usr, string pwd, string nR)
+    public void agregarUsuario(string usr, string pwd, string nR,string t)
     {
-        Usuario us = new Usuario(usr, pwd,nR);
+        Usuario us = new Usuario(usr, pwd,nR,t);
         usuarios.Add(us);
     }
 

@@ -116,7 +116,9 @@ public class PresentacionTienda
                string pwd = Console.ReadLine();
                Console.Write("Introduzca el rol del nuevo usuario: ");
                string nombRol = Console.ReadLine();
-               Log.agregarUsuario(usr,pwd,nombRol);
+               Console.Write("Introduzca el tipo : ");
+               string t = Console.ReadLine();
+               Log.agregarUsuario(usr,pwd,nombRol,t);
                break;
             case 7:
                Console.Write("Introduzca el usuario: ");
@@ -166,7 +168,7 @@ public class PresentacionTienda
                MostrarProductosDisponibles(inventario);
                break;
             case 2:
-               RealizarCompra(inventario);
+               RealizarCompra(inventario,us);
                break;
             case 3 :
                cerrarSesion = true;
@@ -210,7 +212,7 @@ public class PresentacionTienda
       Console.WriteLine("<-=-=-=-=-==================================== =-=-=-=-=-=->");
    }
 
-   public void RealizarCompra(Inventario i)
+   public void RealizarCompra(Inventario i,Usuario cliente)
    {
       Carrito c = new Carrito();
       bool acabarCarrito = false;
@@ -255,26 +257,50 @@ public class PresentacionTienda
          string nombreCompra = Console.ReadLine();
          Console.Write("Metodo de pago: ");
          string metodoPago = Console.ReadLine();
-         Compra compra = new Compra(nombreCompra, metodoPago,c);
-         MostrarCompra(c,compra);
-         i.guardarProductosVendidos(c.getCarrito(),c.getListaCantidad());
+         Compra compra = new Compra(nombreCompra,c);
+         Pago pag = new Pago();
+         if (metodoPago == "Tarjeta" || metodoPago=="tarjeta")
+         {
+            Console.Write("Ingrese el numero de la tarjeta: ");
+            string num = Console.ReadLine();
+            pag = new PagoTarjeta(num,compra.getTotal(),metodoPago);
+         }else if (metodoPago == "Efectivo")
+         {
+            pag = new PagoEfectivo(compra.getTotal(),metodoPago);
+         }
+         compra.setMetodoPago(pag);
+         MostrarCarrito(c);
+         compra.sacarSubtotal();
+         compra.sacarTotal();
+         Console.WriteLine("EL TOTAL CON DESCUENTOS ES DE: ");
+         Console.WriteLine(compra.getTotal());      
+         Console.WriteLine("Comprar");
+         Console.WriteLine("1.si");
+         Console.WriteLine("2.no");
+         int op = int.Parse(Console.ReadLine());
+         if (op == 1)
+         {
+            MostrarCompra(c,compra);
+            i.guardarProductosVendidos(c.getCarrito(),c.getListaCantidad());
+         }
+      
    }
 
    public void MostrarCompra(Carrito c,Compra compra)
    {
       Console.WriteLine(" ");
-      Console.WriteLine("******* LOS DATOS PARA LA COMPRA SON ******* ");
+      Console.WriteLine("******* LOS DATOS DE LA COMPRA SON ******* ");
       Console.Write("Nombre:");
       Console.WriteLine(compra.getNombreCompra());
       Console.Write("El metodo de pago es: ");
-      Console.WriteLine(compra.getMetodoPago());
+      Console.WriteLine(compra.tipoPago());
       
       MostrarCarrito(c);
       compra.sacarSubtotal();
       compra.sacarTotal();
-      Console.Write("El SUBTOTAL ES DE: ");
+      Console.Write("El SUBTOTAL: ");
       Console.WriteLine(compra.getSubtotal());
-      Console.Write("El TOTAL es de: ");
+      Console.Write("El TOTAL: ");
       Console.WriteLine(compra.getTotal());
       Console.WriteLine(" ");
    }

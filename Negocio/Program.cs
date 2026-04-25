@@ -9,8 +9,9 @@ Inventario invent = new Inventario();
 rol.crearRol("Administrador","Controla la tienda",true,true,true,true,true,true,true,true,false);
 rol.crearRol("Cliente","Compra cosas en la tienda",false,false,false,false,false,false,false,false,true);
 
-log.agregarUsuario("Enrique","enrique123","Administrador");
-log.agregarUsuario("Luis","luis123","Cliente");
+log.agregarUsuario("Enrique","enrique123","Administrador","Regular");
+log.agregarUsuario("Luis","luis123","Cliente","VIP");
+log.agregarUsuario("Lucas","lucas123","Cliente","Regular");
 
 invent.AgregarProducto("5756","Detergente Omo",34.56,30," 1kg              ");
 invent.AgregarProducto("2389","Yogurt Sabor Frutilla",27.45,10," 1kg       ");

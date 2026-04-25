@@ -5,20 +5,28 @@ public class Usuario
     private string usuario;
     private string password;
     private Rol rol;
+    private string tipo;
 
     public string getNombreRol()
     {
         return rol.Nombre;
     }
-    public Usuario(string usr, string pwd, string nombreRol)
+
+    public Usuario(string usr, string pwd, string nombreRol, string t)
     {
         usuario = usr;
         password = pwd;
-        rol= new Rol();
+        rol = new Rol();
         rol.Nombre = nombreRol;
+        tipo = t;
     }
 
-    public void setUsuario(string usr) { this.usuario = usr; }
+    public string getTipo()
+    {
+        return tipo;
+    }
+
+public void setUsuario(string usr) { this.usuario = usr; }
 
     public void setPassword(string pwd) { this.password = pwd; }
     

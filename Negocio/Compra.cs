@@ -2,39 +2,48 @@ namespace TiendaConsola;
 
 public class Compra
 {
+    private Descuento descuentoBase;
+    private Descuento descuentoAdi;
     private string NombreCliente;
-    private string MetodoPago;
+    private Pago pago;
     private double Total;
     private double subTotal;
     private Carrito carrito;
     
-    public Compra(string n,string mp,Carrito c)
+    public Compra(string n,Carrito c)
     {
         NombreCliente = n;
-        MetodoPago = mp;
         carrito = c;
+        descuentoAdi = new DescuentoAdicional();
+        descuentoBase = new DescuentoBase();
     }
     public void sacarTotal()
     {
-        for (int i = 0; i < carrito.getCarrito().Count; i++)
-        {
-            Total = Total + (carrito.getCarrito()[i].ObtenerPrecio() * carrito.getListaCantidad()[i]);
-        }
+        Total = subTotal * (descuentoBase.getPorcentajeDesc() + descuentoAdi.getPorcentajeDesc());
     }
     public void sacarSubtotal()
     {
+        subTotal = 0;
         for (int i = 0; i < carrito.getCarrito().Count; i++)
         {
             subTotal = subTotal + (carrito.getListaCantidad()[i] * carrito.getCarrito()[i].ObtenerPrecio());
         }
     }
+    
     public string getNombreCompra() { return NombreCliente; }
 
-    public string getMetodoPago() { return MetodoPago;}
+    public void setMetodoPago(Pago p)
+    {
+        pago = p;
+    }
+
+    public string tipoPago()
+    {
+        return pago.getTipo();
+    }
     public double getSubtotal() { return subTotal;}
     public double getTotal() { return Total;}
     public void setNombreCompra(string com) { NombreCliente = com; }
-    public void setMetodoPago(string met) { MetodoPago = met; }
 
 
 }
