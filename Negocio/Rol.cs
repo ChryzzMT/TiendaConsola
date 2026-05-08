@@ -2,7 +2,7 @@ namespace TiendaConsola;
 
 public class Rol
 {
-    public string Nombre;
+    private string Nombre;
     private string Descripcion;
     private Privilegios Privilegios;
 
@@ -11,6 +11,16 @@ public class Rol
     public List<Rol> getRoles()
     {
         return roles;
+    }
+
+    public string getNombreRol()
+    {
+        return Nombre;
+    }
+
+    public void setNombreRol(string nombreDelRol)
+    {
+        Nombre = nombreDelRol;
     }
 
     public Rol()

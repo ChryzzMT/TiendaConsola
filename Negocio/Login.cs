@@ -2,7 +2,7 @@ namespace TiendaConsola;
 
 public class Login
 {
-    public List<Usuario> usuarios;
+    private List<Usuario> usuarios;
 
     public Login()
     {

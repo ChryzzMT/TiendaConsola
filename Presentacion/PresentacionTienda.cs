@@ -315,7 +315,7 @@ public class PresentacionTienda
          Console.Write("Ingrese su contrasena: ");
          string pwd = Console.ReadLine();
          
-         for (int i = 0; i < l.usuarios.Count; i++)
+         for (int i = 0; i < l.GetListaUsuarios().Count; i++)
          {
             if (l.GetListaUsuarios()[i].obtnUsuario() == usr && l.GetListaUsuarios()[i].obtnPassword() == pwd)
             {

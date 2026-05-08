@@ -9,7 +9,7 @@ public class Usuario
 
     public string getNombreRol()
     {
-        return rol.Nombre;
+        return rol.getNombreRol();
     }
 
     public Usuario(string usr, string pwd, string nombreRol, string t)
@@ -17,7 +17,7 @@ public class Usuario
         usuario = usr;
         password = pwd;
         rol = new Rol();
-        rol.Nombre = nombreRol;
+        rol.setNombreRol(nombreRol);
         tipo = t;
     }
 
@@ -34,9 +34,9 @@ public void setUsuario(string usr) { this.usuario = usr; }
     {
         for(int i=0;i<rol.getRoles().Count;i++)
         {
-            if (rol.getRoles()[i].Nombre == nombreRol)
+            if (rol.getRoles()[i].getNombreRol() == nombreRol)
             {
-                rol.Nombre = nombreRol;
+                rol.setNombreRol(nombreRol);
             }
         }
     }
