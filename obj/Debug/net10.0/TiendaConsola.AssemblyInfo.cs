@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TiendaConsola")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4910a6ff3d3ff89f30a36d809956a9201e57631a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2d5612c3839aa8c6affdbf35ef5f843a9747c850")]
 [assembly: System.Reflection.AssemblyProductAttribute("TiendaConsola")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TiendaConsola")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

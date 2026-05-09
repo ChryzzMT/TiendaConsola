@@ -2,42 +2,38 @@ namespace TiendaConsola;
 
 public class Inventario
 {
-    private List<ProductoInventario> productos;
-    private List<ProductoInventario> productosVendidos;
+    private List<Producto> productos;
+    private List<Producto> productosVendidos;
 
     public Inventario()
     {
-        productos=new List<ProductoInventario>();
-        productosVendidos = new List<ProductoInventario>();
+        productos=new List<Producto>();
+        productosVendidos = new List<Producto>();
     }
     
-    public void agregarCantidad(string codigo, int cantidadExtra)
-    {
-        for (int i = 0; i < productos.Count; i++)
-        {
-            if (productos[i].getProducto().ObtenerCodigo() == codigo)
-            {
-                productos[i].setCantidad(productos[i].getCantidad()+cantidadExtra);
-            }
-        }
-    }
 
-    public List<ProductoInventario> getProductoVendidos()
+    public List<Producto> getProductoVendidos()
     {
         return productosVendidos;
     }
-    public void AgregarProducto(string codigo ,string nombre,double precio, int cantidad, string descripcion)
+    public void AgregarProducto(string codigo ,string nombre,double precio, int cantidad, string descripcion,string tipo,string licencia)
     {
-        Producto p = new Producto(codigo, nombre, precio,descripcion);
-        ProductoInventario pi = new ProductoInventario(p, cantidad);
-        productos.Add(pi);
+        Producto p = new Producto();
+        if (tipo == "Fisico")
+        {
+            p = new ProductoFisico(codigo,nombre,descripcion,tipo,precio,cantidad);
+        }else if (tipo == "Digital")
+        { 
+            p = new ProductoDigital(codigo, nombre, descripcion, tipo, precio, licencia);
+        }
+        productos.Add(p);
     }
 
     public void EliminarProducto(string codigo)
     {
         for(int i=0;i<productos.Count;i++)
         {
-            if (productos[i].getProducto().ObtenerCodigo() == codigo)
+            if (productos[i].ObtenerCodigo() == codigo)
             {
                 productos.Remove(productos[i]);
             }
@@ -49,27 +45,27 @@ public class Inventario
     {
         for (int i = 0; i < productos.Count; i++)
         {
-            if (productos[i].getProducto().ObtenerCodigo() == cod)
+            if (productos[i].ObtenerCodigo() == cod)
             {
-                productos[i].getProducto().setNombre(NuevoNomb);
-                productos[i].getProducto().setPrecio(NuevoPrecio);
+                productos[i].setNombre(NuevoNomb);
+                productos[i].setPrecio(NuevoPrecio);
             }
         }
     }
 
     public void quitarCantidadInventario(int i, int cantParaRestar)
     {
-        int nuevoStck = productos[i].getCantidad()- cantParaRestar;
-        productos[i].setCantidad(nuevoStck);
+        int nuevoStck = productos[i].getStock()- cantParaRestar;
+        productos[i].setStock(nuevoStck);
     }
 
     public void devolverCantidad(string cod, int cantRestaurar)
     {
         for (int i = 0; i < productos.Count; i++)
         {
-            if (cod == productos[i].getProducto().ObtenerCodigo())
+            if (cod == productos[i].ObtenerCodigo())
             {
-                productos[i].setCantidad(productos[i].getCantidad()+cantRestaurar);
+                productos[i].setStock(productos[i].getStock()+cantRestaurar);
             }
         }
     }
@@ -78,13 +74,23 @@ public class Inventario
     {
         for (int i = 0; i < carrito.Count; i++)
         {
-            ProductoInventario productoVendido = new ProductoInventario(carrito[i],cantVendida[i]);
+            Producto productoVendido = carrito[i];
             productosVendidos.Add(productoVendido);
         }
     }
-    public List<ProductoInventario> GetInventario()
+    public List<Producto> GetInventario()
     {
         return productos;
     }
+    /* public void agregarCantidad(string codigo, int cantidadExtra)
+    {
+        for (int i = 0; i < productos.Count; i++)
+        {
+            if (productos[i].ObtenerCodigo() == codigo)
+            {
+                productos[i].setCantidad(productos[i].getCantidad()+cantidadExtra);
+            }
+        }
+    }*/
 
 }

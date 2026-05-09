@@ -19,17 +19,23 @@ public class Carrito
         return carrito;
     }
 
-    public void AgregarAlCarrito(Inventario inventario, string nombre, int cantidad)
+    public bool AgregarAlCarrito(Inventario inventario, string nombre, int cantidad,string licencia)
     {
         for (int  i = 0; i < inventario.GetInventario().Count; i++)
         {
-            if (inventario.GetInventario()[i].getProducto().ObtenerNombre()==nombre)
+            if (inventario.GetInventario()[i].ObtenerNombre()==nombre)
             {
-                carrito.Add(inventario.GetInventario()[i].getProducto());
-                ListaCantidad.Add(cantidad);
-                inventario.quitarCantidadInventario(i,cantidad);
+                if (inventario.GetInventario()[i].validacion(licencia, cantidad))
+                {
+                    carrito.Add(inventario.GetInventario()[i]);
+                    ListaCantidad.Add(cantidad);
+                    inventario.quitarCantidadInventario(i,cantidad);
+                    return true;
+                }
             }
         }
+
+        return false;
     }
 
     public void EliminarDelCarrito(string nombre,Inventario inv)

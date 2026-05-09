@@ -6,14 +6,23 @@ public class Producto
     private string nombre;
     private double precio;
     private string descripcion;
+    private string tipo;
 
-    public Producto(string codigo, string nombre, double precio,string descripcion)
+    
+    public Producto(string codigo, string nombre, double precio,string descripcion,string tipo)
     {
         this.codigo = codigo;
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
+        this.tipo = tipo;
     }
+
+    public virtual bool validacion(string l,int c)
+    {
+        return false;
+    }
+    public string getTipo() { return tipo; }
 
     public void setCodigo(string c)
     {
@@ -30,8 +39,28 @@ public class Producto
         precio = p;
     }
 
+    public void setTipo(string t)
+    {
+        tipo = t;
+    }
+
+    public void setDescripcion(string d)
+    {
+        descripcion = d;
+    }
     public string getDescripcion() { return descripcion;}
+    
     public string ObtenerCodigo() { return this.codigo; }
     public string ObtenerNombre() { return this.nombre; }
     public double ObtenerPrecio() { return this.precio; }
+
+    public virtual void setStock(int c) { }
+
+    public virtual int getStock() { return 0; }
+
+    public virtual string getLicencia() { return "No"; }
+    public Producto()
+    {
+        
+    }
 }

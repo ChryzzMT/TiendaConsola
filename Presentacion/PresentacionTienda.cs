@@ -20,18 +20,20 @@ public class PresentacionTienda
       Console.WriteLine("LOS PRODUCTOS DISPONIBLES SON: ");
       for(int i=0;i<inventario.GetInventario().Count; i++)
       {
-         if (inventario.GetInventario()[i].getCantidad() > 0)
+         if (inventario.GetInventario()[i].getStock() >= 0)
          {
-            Console.Write(inventario.GetInventario()[i].getProducto().ObtenerNombre());
-            Console.Write(inventario.GetInventario()[i].getProducto().getDescripcion());
+            Console.Write(inventario.GetInventario()[i].ObtenerNombre());
+            Console.Write(inventario.GetInventario()[i].getDescripcion());
             Console.Write("        ");
             Console.Write("PRECIO:");
-            Console.Write(inventario.GetInventario()[i].getProducto().ObtenerPrecio());
+            Console.Write(inventario.GetInventario()[i].ObtenerPrecio());
             Console.Write("        ");
-            Console.Write("CANTIDAD:");
-            Console.Write(inventario.GetInventario()[i].getCantidad());
+            if (inventario.GetInventario()[i].getTipo() == "Fisico")
+            {
+               Console.Write("CANTIDAD:");
+               Console.Write(inventario.GetInventario()[i].getStock());
+            }
             Console.WriteLine(" ");
-
          }
       }
       Console.WriteLine(" ");
@@ -40,16 +42,19 @@ public class PresentacionTienda
    {
       for(int i=0;i<inventario.GetInventario().Count; i++)
       {
-         Console.Write(inventario.GetInventario()[i].getProducto().ObtenerCodigo());
+         Console.Write(inventario.GetInventario()[i].ObtenerCodigo());
          Console.Write("        ");
-            Console.Write(inventario.GetInventario()[i].getProducto().ObtenerNombre());
+            Console.Write(inventario.GetInventario()[i].ObtenerNombre());
             Console.Write("        ");
             Console.Write("PRECIO:");
-            Console.Write(inventario.GetInventario()[i].getProducto().ObtenerPrecio());
+            Console.Write(inventario.GetInventario()[i].ObtenerPrecio());
             Console.Write("        ");
-            Console.Write("CANTIDAD:");
-            Console.Write(inventario.GetInventario()[i].getCantidad());
-            Console.WriteLine(" ");
+            if (inventario.GetInventario()[i].getTipo() == "Fisico")
+            {
+               Console.Write("CANTIDAD:");
+               Console.Write(inventario.GetInventario()[i].getStock());
+               Console.WriteLine(" ");
+            }
       }
      
    }
@@ -88,7 +93,11 @@ public class PresentacionTienda
                int stock = int.Parse(Console.ReadLine());
                Console.Write("Introduzca una descripcion del producto: ");
                string descripcion = Console.ReadLine();
-               inventario.AgregarProducto(codigo, nombre, precio, stock,descripcion);
+               Console.Write("Introduzca el tipo del producto: ");
+               string tipo = Console.ReadLine();
+               Console.Write("Introduzca la licencia del producto: ");
+               string licen = Console.ReadLine();
+               inventario.AgregarProducto(codigo, nombre, precio, stock,descripcion,tipo,licen);
                break;
             case 3:
                Console.Write("Introduzca el codigo del producto: ");
@@ -203,11 +212,17 @@ public class PresentacionTienda
          Console.Write(c.getCarrito()[i].ObtenerNombre());
          Console.Write("      EL PRECIO ES DE:");
          Console.Write(c.getCarrito()[i].ObtenerPrecio());
-         Console.Write("      LA CANTIDAD ES DE:");
-         Console.Write(c.getListaCantidad()[i]);
-         Console.Write("      EL SUBTOTAL ES DE:");
-         double subtotalIndividual = c.getListaCantidad()[i] * c.getCarrito()[i].ObtenerPrecio();
-         Console.WriteLine(subtotalIndividual);// saca el subtotal de cada producto
+         if (c.getCarrito()[i].getTipo() == "Fisico")
+         {
+            Console.Write("      LA CANTIDAD ES DE:");
+            Console.Write(c.getListaCantidad()[i]);
+            Console.Write("      EL SUBTOTAL ES DE:");
+            double subtotalIndividual = c.getListaCantidad()[i] * c.getCarrito()[i].ObtenerPrecio();
+            Console.WriteLine(subtotalIndividual);// saca el subtotal de cada producto
+         }
+         Console.Write("    EL TIPO ES: ");
+         Console.Write(c.getCarrito()[i].getTipo());
+         Console.WriteLine("");
       }
       Console.WriteLine("<-=-=-=-=-==================================== =-=-=-=-=-=->");
    }
@@ -229,11 +244,28 @@ public class PresentacionTienda
          switch (opc)
          {
             case 1:
-               Console.Write("Ingrese el nombre del producto para agregar al carrito: ");
-               string prodAgregar = Console.ReadLine();
-               Console.Write("Ingrese la cantidad del producto para agregar al carrito: ");
-               int cant = int.Parse(Console.ReadLine());
-               c.AgregarAlCarrito(i,prodAgregar,cant);
+               bool v = false;
+               while (v == false)
+               {
+                  Console.Write("Ingrese si el producto es Digital o Fisico ");
+                  string tipoProd = Console.ReadLine();
+                  Console.Write("Ingrese el nombre del producto para agregar al carrito: ");
+                  string prodAgregar = Console.ReadLine();
+                  int cant = 0;
+                  string licenProd = "";
+                  if (tipoProd == "Fisico" || tipoProd == "fisico")
+                  {
+                     Console.Write("Ingrese la cantidad del producto para agregar al carrito: ");
+                     cant = int.Parse(Console.ReadLine());
+                  }
+                  else if (tipoProd == "Digital" || tipoProd == "digital")
+                  {
+                     Console.Write("Ingrese la licencia del producto: ");
+                     licenProd = Console.ReadLine();
+                  }
+                  v=c.AgregarAlCarrito(i, prodAgregar, cant, licenProd);
+               }
+
                break;
             case 2 :
                MostrarCarrito(c);
@@ -338,14 +370,14 @@ public class PresentacionTienda
       double Total = 0;
       for (int i = 0; i < inv.getProductoVendidos().Count; i++)
       {
-         Console.Write(inv.getProductoVendidos()[i].getProducto().ObtenerNombre());
+         Console.Write(inv.getProductoVendidos()[i].ObtenerNombre());
          Console.Write("       ");
          Console.Write("CANTIDAD: ");
-         Console.Write(inv.getProductoVendidos()[i].getCantidad());
+         Console.Write(inv.getProductoVendidos()[i].getStock());
          Console.Write("    PRECIO: ");
-         Console.Write(inv.getProductoVendidos()[i].getProducto().ObtenerPrecio());
+         Console.Write(inv.getProductoVendidos()[i].ObtenerPrecio());
          Console.Write("    SUBTOTAL: "); 
-         Total=Total+ inv.getProductoVendidos()[i].getProducto().ObtenerPrecio()*inv.getProductoVendidos()[i].getCantidad();
+         Total=Total+ inv.getProductoVendidos()[i].ObtenerPrecio()*inv.getProductoVendidos()[i].getStock();
          Console.Write(Total);
          Console.WriteLine(" ");
       }

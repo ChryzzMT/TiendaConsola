@@ -32,7 +32,14 @@ public class Compra
         subTotal = 0;
         for (int i = 0; i < carrito.getCarrito().Count; i++)
         {
-            subTotal = subTotal + (carrito.getListaCantidad()[i] * carrito.getCarrito()[i].ObtenerPrecio());
+            if (carrito.getCarrito()[i].getTipo() == "Digital")
+            {
+                subTotal = subTotal + carrito.getCarrito()[i].ObtenerPrecio();
+            }
+            else
+            {
+                subTotal = subTotal + (carrito.getListaCantidad()[i] * carrito.getCarrito()[i].ObtenerPrecio());
+            }
         }
     }
     
