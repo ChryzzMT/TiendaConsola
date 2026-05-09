@@ -16,11 +16,16 @@ public class Compra
         carrito = c;
         descuentoAdi = new DescuentoAdicional();
         descuentoBase = new DescuentoBase();
+        Total = 0;
     }
-    public void sacarTotal()
+    public void sacarTotal(string nivelCliente)
     {
-        double exp = subTotal * (descuentoBase.getPorcentajeDesc() + descuentoAdi.getPorcentajeDesc());
-        Total = subTotal - exp;
+        Total = subTotal;
+        if (nivelCliente == "VIP")
+        {
+            Total= Total-descuentoBase.AplicarDesc(Total);
+        }
+        Total = Total-descuentoAdi.AplicarDesc(Total);
     }
     public void sacarSubtotal()
     {

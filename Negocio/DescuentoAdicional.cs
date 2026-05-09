@@ -16,7 +16,7 @@ public class DescuentoAdicional:Descuento
         {
             return monto * getPorcentajeDesc();
         }
-        return monto;
+        return 0;
     }
 
     public void setMontoActivacion(double m)

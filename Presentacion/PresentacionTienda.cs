@@ -271,7 +271,7 @@ public class PresentacionTienda
          compra.setMetodoPago(pag);
          MostrarCarrito(c);
          compra.sacarSubtotal();
-         compra.sacarTotal();
+         compra.sacarTotal(cliente.getTipo());
          Console.WriteLine("EL TOTAL CON DESCUENTOS ES DE: ");
          Console.WriteLine(compra.getTotal());      
          Console.WriteLine("Comprar");
@@ -296,8 +296,6 @@ public class PresentacionTienda
       Console.WriteLine(compra.tipoPago());
       
       MostrarCarrito(c);
-      compra.sacarSubtotal();
-      compra.sacarTotal();
       Console.Write("El SUBTOTAL: ");
       Console.WriteLine(compra.getSubtotal());
       Console.Write("El TOTAL: ");
